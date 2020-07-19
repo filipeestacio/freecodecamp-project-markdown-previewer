@@ -1,24 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
+import ReactFCCtest from 'react-fcctest';
+import { placeholder } from './placeholder';
 
 function App() {
+  const [content, setContent] = useState('');
+
+  useEffect(() => setContent(placeholder), []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ReactFCCtest />
+      <textarea id="editor" onChange={(e) => setContent(e.target.value)}>
+        {placeholder}
+      </textarea>
+      <div id="preview">
+        <ReactMarkdown source={content} />
+      </div>
     </div>
   );
 }
